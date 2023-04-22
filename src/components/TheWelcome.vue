@@ -13,6 +13,7 @@ export default {
       AppId: null,
       AppDes: null,
       AppRecall: null,
+      isLogin: false,
     };
   },
   updated() {
@@ -20,9 +21,27 @@ export default {
   },
   mounted() {
     this.getApp();
+    // 如果存在token的cookie
+    if (this.$cookies.isKey("token")) {
+      this.isLogin = true;
+    }
   },
   methods: {
     getApp() {
+      // 如果存在action参数
+      if (this.$route.query.action == "loginout") {
+        // 弹出确认框
+        mdui.confirm(
+          "确定要退出登录吗？<br> Are you sure you want to log out?",
+          function () {
+            // 点击确认后，清除所有cookie
+            this.$cookies.remove("token");
+          },
+          function () {},
+          { history: false, modal: true }
+        );
+      }
+
       let appid = this.$route.query.appid;
       this.$axios
         .post("/App/AppInfo", { method: "appid", appid: appid })
@@ -60,3 +79,9 @@ export { WelcomeItem };
     {{ AppDes }}
   </WelcomeItem>
 </template>
+
+<style scoped>
+#LoginSuccess {
+  padding-top: 100px;
+}
+</style>

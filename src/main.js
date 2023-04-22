@@ -3,7 +3,6 @@ import { createPinia } from "pinia";
 import mdui from "mdui";
 import VueCookies from "vue-cookies";
 import axios from "axios";
-import VueAxios from "vue-axios";
 import md5 from "js-md5";
 
 import App from "./App.vue";
@@ -23,7 +22,7 @@ router.beforeEach(function (to, from, next) {
   if (VueCookies.get("token") == null) {
     //满足一定的条件再跳转
     if (to.path == "/pay") {
-      mdui.alert("请先登陆", function () {
+      mdui.alert("Please login", function () {
         next("/");
       });
     } else {
