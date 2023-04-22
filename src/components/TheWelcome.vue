@@ -35,7 +35,12 @@ export default {
           "确定要退出登录吗？<br> Are you sure you want to log out?",
           function () {
             // 点击确认后，清除所有cookie
-            this.$cookies.remove("token");
+            document.cookie.split(";").forEach(function (c) {
+              document.cookie = c
+                .replace(/^ +/, "")
+                .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+            });
+            return;
           },
           function () {},
           { history: false, modal: true }
