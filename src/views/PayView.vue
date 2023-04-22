@@ -1,5 +1,5 @@
 <script setup>
-import PayView from '../components/Pay.vue'
+import PayView from "../components/Pay.vue";
 </script>
 
 <template>
