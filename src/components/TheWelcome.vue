@@ -29,7 +29,7 @@ export default {
   methods: {
     getApp() {
       // 如果存在action参数
-      if (this.$route.query.action == "loginout") {
+      if (this.$route.query.action == "logout") {
         // 弹出确认框
         mdui.confirm(
           "确定要退出登录吗？<br> Are you sure you want to log out?",
